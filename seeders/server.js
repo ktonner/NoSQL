@@ -1,7 +1,10 @@
 const express = require("express");
 const mongojs = require("mongojs");
-
 const app = express();
+// Import routes and give the server access to them.
+var routes = require("../routes/htmlRoutes");
+
+app.use(routes);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
