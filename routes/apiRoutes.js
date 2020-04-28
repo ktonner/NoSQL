@@ -1,10 +1,11 @@
 const db = require("../models/workout");
-const app = require("express")
+const express = require("express")
+const app = express();
 const router = require("express").Router();
 
 
     //Find all workouts
-    router.get("/api/workouts", (req, res) => {
+    app.get("/api/workouts", (req, res) => {
         db.workouts.find(), (err, data) => {
           if (err) {
             console.log(err);
@@ -14,7 +15,7 @@ const router = require("express").Router();
         }});
 
         //Create a workout
-    router.post("/api/workouts", ({ body }, res) => {
+    app.post("/api/workouts", ({ body }, res) => {
         const workout = new Workout(body)
             Workout.create(workout)
             .then(dbWorkout => {
@@ -26,7 +27,7 @@ const router = require("express").Router();
         });
 
       //Update a workout
-      router.put("/api/workouts/:id", (req, res) => {
+      app.put("/api/workouts/:id", (req, res) => {
         db.workouts.update({_id: req.params.id}, (err, data) => {
           if (err) {
             console.log(err);
@@ -36,4 +37,4 @@ const router = require("express").Router();
         });
       });
 
-      module.exports = router
+      module.exports = app

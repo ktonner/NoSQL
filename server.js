@@ -16,10 +16,8 @@ app.use(express.json());
 app.use(express.static("public"));
 // Routes
 // =============================================================
-require("./routes/htmlRoutes")(app);
-
-// Here we introduce HTML routing to serve different HTML files
-require("./routes/apiRoutes")(app);
+app.use(require("./routes/htmlRoutes"))
+app.use(require("./routes/apiRoutes"))
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/custommethods", { useNewUrlParser: true, useUnifiedTopology: true  });
 
