@@ -1,11 +1,14 @@
 const express = require("express");
 const mongojs = require("mongojs");
+const mongoose = require("mongoose");
 const app = express();
+const Workout = require("../models/workout")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static("public"));
+app.use(express.static(__dirname + '/public'));
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/exercise", { useNewUrlParser: true });
 
 const databaseUrl = "exercise";
 const collections = ["workouts"];
