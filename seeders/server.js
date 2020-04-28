@@ -1,10 +1,6 @@
 const express = require("express");
 const mongojs = require("mongojs");
 const app = express();
-// Import routes and give the server access to them.
-var routes = require("../routes/htmlRoutes");
-
-app.use(routes);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -15,6 +11,10 @@ const databaseUrl = "exercise";
 const collections = ["workouts"];
 
 const db = mongojs(databaseUrl, collections);
+
+// Import routes and give the server access to them.
+require("../routes/htmlRoutes")(app);
+require("../routes/apiRoutes")(app);
 
 // Listen on port 3000
 app.listen(3000, () => {
