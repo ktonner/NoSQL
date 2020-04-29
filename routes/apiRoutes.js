@@ -13,8 +13,10 @@ app.get("/api/workouts", (req, res) => {
 });
 
 app.get("/api/workouts/range", (req, res) => {
-    Workout.find({}).then(dbWorkout => {
+    Workout.find({}).sort({day:-1}).limit(7)
+    .then(dbWorkout => {
         res.json(dbWorkout);
+        console.log(dbWorkout)
     })
     .catch(err => {
         res.json(err);
