@@ -1,40 +1,47 @@
-const db = require("../models/workout");
+const Workout = require("../models/workout");
 const express = require("express")
 const app = express();
-const router = require("express").Router();
 
+//Find all workouts
+app.get("/api/workouts", (req, res) => {
+    Workout.find({}).then(dbWorkout => {
+        res.json(dbWorkout);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+});
 
-    //Find all workouts
-    app.get("/api/workouts", (req, res) => {
-        db.workouts.find(), (err, data) => {
-          if (err) {
-            console.log(err);
-          } else {
-            res.json(data);
-          }
-        }});
+app.get("/api/workouts/range", (req, res) => {
+    Workout.find({}).then(dbWorkout => {
+        res.json(dbWorkout);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+});
 
-        //Create a workout
-    app.post("/api/workouts", ({ body }, res) => {
-        const workout = new Workout(body)
-            Workout.create(workout)
-            .then(dbWorkout => {
-              res.json(dbWorkout);
-            })
-            .catch(err => {
-              res.json(err);
-            });
+//Create a workout
+app.post("/api/workouts", (req, res) => {
+    Workout.create({})
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.json(err);
         });
+});
 
-      //Update a workout
-      app.put("/api/workouts/:id", (req, res) => {
-        db.workouts.update({_id: req.params.id}, (err, data) => {
-          if (err) {
-            console.log(err);
-          } else {
-            res.json(data);
-          }
+//Update a workout
+app.put("/api/workouts/:id", (req, res) => {
+    console.log(req.params.id)
+    Workout.findByIdAndUpdate(req.params.id, { $push: { exercises: req.body } }, { new: true })
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.json(err);
         });
-      });
+});
 
-      module.exports = app
+module.exports = app
