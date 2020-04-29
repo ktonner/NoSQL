@@ -5,6 +5,13 @@ const app = express();
 //Find all workouts
 app.get("/api/workouts", (req, res) => {
     Workout.find({}).then(dbWorkout => {
+        lastWorkout = dbWorkout[dbWorkout.length-1]
+        var e = lastWorkout.exercises
+        for(i=0;i<e.length; i++){
+            lastWorkout.totalDuration += e[i].duration
+            console.log(e[i].duration)
+        }
+        console.log(lastWorkout.totalDuration)
         res.json(dbWorkout);
     })
     .catch(err => {
