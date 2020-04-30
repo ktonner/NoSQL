@@ -22,8 +22,6 @@ Click 'New Workout' to add a new workout. You can add multiple workouts a day. W
 If you have any questions, contact ktonner on GitHub.
 
 
-![GitHub profile pic](https://avatars3.githubusercontent.com/u/60409793?v=4)
-
 ## License
 MIT License
 
